@@ -23,7 +23,6 @@ input[type="date"] {
   background-image: none;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 14px;
 }
 
 .error {
