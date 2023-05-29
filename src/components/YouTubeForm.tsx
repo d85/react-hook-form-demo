@@ -5,13 +5,13 @@ let renderCount = 0
 
 export const YouTubeForm = () => {
   const form = useForm<FormValues>({
-    defaultValues: async () => {
-      const response = await fetch("https://jsonplaceholder.typicode.com/users/1")
-      const data = await response.json()
-      return {
-        username: "Batman",
-        email: data.email,
-        channel: ""
+    defaultValues: {
+      username: "Batman",
+      email: "",
+      channel: "",
+      social: {
+        twitter: "",
+        facebook: ""
       }
     }
   })
@@ -22,6 +22,10 @@ export const YouTubeForm = () => {
     username: string
     email: string
     channel: string
+    social: {
+      twitter: string
+      facebook: string
+    }
   }
 
   const onSubmit = (data: FormValues) => {
@@ -56,13 +60,13 @@ export const YouTubeForm = () => {
             validate: {
               notAdmin: (fieldValue) => {
                 return (
-                  fieldValue !== "admin@example.com" || 
+                  fieldValue !== "admin@example.com" ||
                   "Enter a different email address"
                 )
               },
               notBlackListed: (fieldValue) => {
                 return (
-                  !fieldValue.endsWith("baddomain.com") || 
+                  !fieldValue.endsWith("baddomain.com") ||
                   "This domain is not supported"
                 )
               }
@@ -77,6 +81,16 @@ export const YouTubeForm = () => {
             required: "Channel is required"
           })} />
           <p className="error">{errors.channel?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="twitter">Twitter</label>
+          <input type="text" id="twitter" {...register("social.twitter")} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="facebook">Facebook</label>
+          <input type="text" id="facebook" {...register("social.facebook")} />
         </div>
 
         <button>Submit</button>
