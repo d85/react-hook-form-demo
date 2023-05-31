@@ -3,6 +3,17 @@ import { DevTool } from '@hookform/devtools'
 
 let renderCount = 0
 
+type FormValues = {
+  username: string
+  email: string
+  channel: string
+  social: {
+    twitter: string
+    facebook: string
+  }
+  phoneNumbers: string[]
+}
+
 export const YouTubeForm = () => {
   const form = useForm<FormValues>({
     defaultValues: {
@@ -12,21 +23,12 @@ export const YouTubeForm = () => {
       social: {
         twitter: "",
         facebook: ""
-      }
+      },
+      phoneNumbers: ["", ""]
     }
   })
   const { register, control, handleSubmit, formState } = form
   const { errors } = formState
-
-  type FormValues = {
-    username: string
-    email: string
-    channel: string
-    social: {
-      twitter: string
-      facebook: string
-    }
-  }
 
   const onSubmit = (data: FormValues) => {
     console.log('Form submitted', data)
@@ -91,6 +93,16 @@ export const YouTubeForm = () => {
         <div className="form-control">
           <label htmlFor="facebook">Facebook</label>
           <input type="text" id="facebook" {...register("social.facebook")} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primary-phone">Primary phone number</label>
+          <input type="text" id="primary-phone" {...register("phoneNumbers.0")} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondary-phone">Secondary phone number</label>
+          <input type="text" id="secondary-phone" {...register("phoneNumbers.1")} />
         </div>
 
         <button>Submit</button>
