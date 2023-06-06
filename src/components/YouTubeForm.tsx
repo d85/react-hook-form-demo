@@ -43,7 +43,7 @@ export const YouTubeForm = () => {
     control
   })
 
-  const watchUsername = watch("username")
+  const watchForm = watch()
 
   const onSubmit = (data: FormValues) => {
     console.log('Form submitted', data)
@@ -53,7 +53,7 @@ export const YouTubeForm = () => {
   return (
     <div>
       <h1>YouTube Form ({renderCount / 2})</h1>
-      <h2>Watched value: {watchUsername}</h2>
+      <h2>Watched value: {JSON.stringify(watchForm)}</h2>
       <form onSubmit={handleSubmit(onSubmit)} noValidate>
         <div className="form-control">
           <label htmlFor="username">Username</label>
